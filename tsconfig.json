@@ -14,6 +14,7 @@
     "node_modules",
     "dist",
     "typings/browser",
-    "typings/browser.d.ts"
+    "typings/browser.d.ts",
+    "test-run-directory"
   ]
 }

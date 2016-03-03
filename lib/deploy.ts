@@ -3,11 +3,11 @@ import DeployConfig from './models/deploy-config';
 import TaskBase from './tasks/task-base';
 import { config as awsConfig, Credentials } from 'aws-sdk';
 import AWS = require('aws-sdk');
-import Configure from './tasks/configure';
-import CreateGitArchive from './tasks/create-git-archive';
-import FinalizePackageFolder from './tasks/finalize-package-folder';
-import UnzipArchive from './tasks/unzip-archive';
-import ZipApplication from './tasks/zip-application';
+import Configure from './tasks/code/configure';
+import CreateGitArchive from './tasks/code/create-git-archive';
+import FinalizePackageFolder from './tasks/code/finalize-package-folder';
+import UnzipArchive from './tasks/code/unzip-archive';
+import ZipApplication from './tasks/code/zip-application';
 
 export default class Deploy {
   constructor(public config:DeployConfig = new DeployConfig()) {

@@ -4,16 +4,16 @@ require('source-map-support').install({
 let path = require('path');
 let fs = require('fs');
 import { assert } from 'chai';
-import DeployConfig from '../lib/models/deploy-config';
-import CreateGitArchive from '../lib/tasks/create-git-archive';
-import UnzipArchive from '../lib/tasks/unzip-archive';
+import DeployConfig from '../../lib/models/deploy-config';
+import CreateGitArchive from '../../lib/tasks/code/create-git-archive';
+import UnzipArchive from '../../lib/tasks/code/unzip-archive';
 
 describe('Unzip git archive', () => {
   let subject: UnzipArchive;
   let config: DeployConfig;
 
   beforeEach(function() {
-    let jsonPath = path.resolve(__dirname, '../../aws-config.json');
+    let jsonPath = path.resolve(__dirname, '../../../aws-config.json');
     if (!fs.existsSync(jsonPath)) {
       throw new Error("Please create a 'aws-config.json' file in the root directory of this project to test with AWS resources")
     }
@@ -21,7 +21,7 @@ describe('Unzip git archive', () => {
     let rawConfig = JSON.parse(fs.readFileSync(jsonPath));
     config = new DeployConfig(rawConfig);
     config.uniqueID = new Date().valueOf().toString();
-    config.localPathBase = path.resolve(__dirname, '../../test-run-directory');
+    config.localPathBase = path.resolve(__dirname, '../../../test-run-directory');
     subject = new UnzipArchive();
 
     return new CreateGitArchive().run(config);

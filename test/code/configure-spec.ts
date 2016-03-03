@@ -4,15 +4,15 @@ require('source-map-support').install({
 let path = require('path');
 let fs = require('fs');
 import { assert } from 'chai';
-import DeployConfig from '../lib/models/deploy-config';
-import Configure from '../lib/tasks/configure';
+import DeployConfig from '../../lib/models/deploy-config';
+import Configure from '../../lib/tasks/code/configure';
 
 describe('Create git archive', () => {
   let subject: Configure;
   let config: DeployConfig;
 
   beforeEach(function() {
-    let jsonPath = path.resolve(__dirname, '../../aws-config.json');
+    let jsonPath = path.resolve(__dirname, '../../../aws-config.json');
     if (!fs.existsSync(jsonPath)) {
       throw new Error("Please create a 'aws-config.json' file in the root directory of this project to test with AWS resources")
     }

@@ -5,8 +5,8 @@ let path = require('path');
 let fs = require('fs');
 import { assert } from 'chai';
 import DeployConfig from '../../lib/models/deploy-config';
-import Configure from '../../lib/tasks/configure';
-import CreateGitArchive from '../../lib/tasks/create-git-archive';
+import Configure from '../../lib/tasks/code/configure';
+import CreateGitArchive from '../../lib/tasks/code/create-git-archive';
 import UploadCode from '../../lib/tasks/lambda/upload-code';
 import { S3, Credentials } from 'aws-sdk';
 

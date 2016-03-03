@@ -4,18 +4,15 @@ require('source-map-support').install({
 let path = require('path');
 let fs = require('fs');
 import { assert } from 'chai';
-import DeployConfig from '../lib/models/deploy-config';
-import ZipApplication from '../lib/tasks/zip-application';
-import deleteFolder from '../lib/util/delete-folder';
+import DeployConfig from '../../lib/models/deploy-config';
+import CreateGitArchive from '../../lib/tasks/code/create-git-archive';
 
-describe('Zip application', () => {
-  let subject: ZipApplication;
+describe('Create git archive', () => {
+  let subject: CreateGitArchive;
   let config: DeployConfig;
-  let testFileName: string = new Date().toString() + '.txt';
-  let fileContents = 'hi';
 
   beforeEach(function() {
-    let jsonPath = path.resolve(__dirname, '../../aws-config.json');
+    let jsonPath = path.resolve(__dirname, '../../../aws-config.json');
     if (!fs.existsSync(jsonPath)) {
       throw new Error("Please create a 'aws-config.json' file in the root directory of this project to test with AWS resources")
     }
@@ -23,13 +20,8 @@ describe('Zip application', () => {
     let rawConfig = JSON.parse(fs.readFileSync(jsonPath));
     config = new DeployConfig(rawConfig);
     config.uniqueID = new Date().valueOf().toString();
-    config.localPathBase = path.resolve(__dirname, '../../test-run-directory');
-    subject = new ZipApplication();
-
-    if (!fs.existsSync(config.localPathBase)) {
-      fs.mkdirSync(config.localPathBase);
-    }
-    fs.writeFileSync(path.resolve(config.localPathBase, testFileName), fileContents);
+    config.localPathBase = path.resolve(__dirname, '../../../test-run-directory');
+    subject = new CreateGitArchive();
   });
 
   afterEach(function() {
@@ -38,17 +30,16 @@ describe('Zip application', () => {
     if (fs.existsSync(zipPath)) {
       fs.unlinkSync(zipPath);
     }
-    return deleteFolder(config.localPathBase);
   });
 
-  it('should zip the application', function() {
+  it('should create the archive', function() {
     this.timeout(5000);
     return subject.run(config)
     .then(() => {
-      let folderPath = `${config.localPathBase}`;
-      assert.isFalse(fs.existsSync(folderPath));
       let zipPath = `${config.localPathBase}.zip`;
       assert.isTrue(fs.existsSync(zipPath));
+      let stats = fs.statSync(zipPath);
+      assert.isTrue(stats.size > 0);
     });
   });
 });

@@ -4,16 +4,16 @@ require('source-map-support').install({
 let path = require('path');
 let fs = require('fs');
 import { assert } from 'chai';
-import DeployConfig from '../lib/models/deploy-config';
-import FinalizePackageFolder from '../lib/tasks/finalize-package-folder';
-import deleteFolder from '../lib/util/delete-folder';
+import DeployConfig from '../../lib/models/deploy-config';
+import FinalizePackageFolder from '../../lib/tasks/code/finalize-package-folder';
+import deleteFolder from '../../lib/util/delete-folder';
 
 describe('Finalize package folder', () => {
   let subject: FinalizePackageFolder;
   let config: DeployConfig;
 
   beforeEach(function() {
-    let jsonPath = path.resolve(__dirname, '../../aws-config.json');
+    let jsonPath = path.resolve(__dirname, '../../../aws-config.json');
     if (!fs.existsSync(jsonPath)) {
       throw new Error("Please create a 'aws-config.json' file in the root directory of this project to test with AWS resources")
     }
@@ -21,7 +21,7 @@ describe('Finalize package folder', () => {
     let rawConfig = JSON.parse(fs.readFileSync(jsonPath));
     config = new DeployConfig(rawConfig);
     config.uniqueID = new Date().valueOf().toString();
-    config.localPathBase = path.resolve(__dirname, '../../test-run-directory');
+    config.localPathBase = path.resolve(__dirname, '../../../test-run-directory');
     fs.mkdirSync(config.localPathBase);
     subject = new FinalizePackageFolder();
   });

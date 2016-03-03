@@ -1,7 +1,7 @@
 import { Promise } from 'es6-promise';
-import DeployConfig from '../models/deploy-config';
-import TaskBase from './task-base';
-import deleteFolder from '../util/delete-folder';
+import DeployConfig from '../../models/deploy-config';
+import TaskBase from '../task-base';
+import deleteFolder from '../../util/delete-folder';
 
 export default class FinalizePackageFolder extends TaskBase {
   run(config: DeployConfig): Promise<any> {

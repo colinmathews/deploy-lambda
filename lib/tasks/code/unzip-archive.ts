@@ -1,8 +1,8 @@
 import { Promise } from 'es6-promise';
-import DeployConfig from '../models/deploy-config';
-import TaskBase from './task-base';
+import DeployConfig from '../../models/deploy-config';
+import TaskBase from '../task-base';
 import fs = require('fs');
-import deleteFolder from '../util/delete-folder';
+import deleteFolder from '../../util/delete-folder';
 let unzip = require('unzip');
 
 export default class UnzipArchive extends TaskBase {

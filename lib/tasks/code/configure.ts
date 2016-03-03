@@ -1,7 +1,7 @@
 require('date-format-lite');
 import { Promise } from 'es6-promise';
-import DeployConfig from '../models/deploy-config';
-import TaskBase from './task-base';
+import DeployConfig from '../../models/deploy-config';
+import TaskBase from '../task-base';
 
 function parseCommitFromGitLog(log:string):string {
   return log.replace('commit ', '').substring(0, 7);

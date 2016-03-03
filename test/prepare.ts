@@ -6,9 +6,9 @@ let path = require('path');
 import DeployConfig from '../lib/models/deploy-config';
 
 export default function prepare(): DeployConfig {
-  let jsonPath = path.resolve(__dirname, '../../aws-config.json');
+  let jsonPath = path.resolve(__dirname, '../../deploy-config.json');
   if (!fs.existsSync(jsonPath)) {
-    throw new Error("Please create a 'aws-config.json' file in the root directory of this project to test with AWS resources")
+    throw new Error("Please create a 'deploy-config.json' file in the root directory of this project to run tests")
   }
 
   let rawConfig = JSON.parse(fs.readFileSync(jsonPath));

@@ -9,15 +9,22 @@ function parseCommitFromGitLog(log:string):string {
 
 export default class Configure extends TaskBase {
   run(config: DeployConfig): Promise<any> {
-    return this.execute('git log -1')
+    return Promise.resolve()
+    .then(() => {
+      if (!config.uniqueID) {
+        return this.execute('git log -1');
+      }
+    })
     .then((result) => {
-      let commit = parseCommitFromGitLog(result);
-      config.uniqueID = config.uniqueID || `deploy-${config.targetEnvironment}-${commit}`;
+      if (!config.uniqueID) {
+        let commit = parseCommitFromGitLog(result);
+        config.uniqueID = `deploy-${config.targetEnvironment}-${commit}`; 
+      }
       config.localPathBase = config.localPathBase || `${this.rootPath()}/${config.uniqueID }`;
 
-      let baseKey = config.s3KeyBase.replace(/\/?$/gi, '');
-      let now = <any>new Date();
-      config.s3KeyForZip = config.s3KeyForZip || `${baseKey}/${now.format('MMMM-DD-YYYY')}.zip`;
+      // Remove last slash so this is normalized
+      config.s3KeyBase = config.s3KeyBase.replace(/\/?$/gi, '');
+      config.s3KeyForZip = config.s3KeyForZip || `${config.s3KeyBase}/${config.uniqueID}.zip`;
     });
   }
 }

@@ -31,8 +31,9 @@ describe('Create git archive', () => {
       assert.isNotNull(config.uniqueID);
       assert.isNotNull(config.localPathBase);
       assert.isTrue(config.localPathBase.indexOf(config.uniqueID) === config.localPathBase.length - config.uniqueID.length);
-      assert.isNotNull(config.s3KeyForZip);
       assert.isNotNull(config.s3KeyBase);
+      assert.isNotNull(config.s3KeyForZip);
+      assert.isTrue(config.s3KeyForZip.indexOf('.zip') > 0 && config.s3KeyForZip.indexOf(config.s3KeyBase) === 0);
     });
   });
 });

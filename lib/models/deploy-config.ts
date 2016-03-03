@@ -1,4 +1,9 @@
 export default class DeployConfig {
+  accessKeyId: string;
+  secretAccessKey: string;
+  region: string;
+  bucket: string;
+
   uniqueID: string;
   targetEnvironment: string;
   localPathBase: string;

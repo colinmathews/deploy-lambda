@@ -1,5 +1,4 @@
 import { Promise } from 'es6-promise';
-import AWSConfig from './models/aws-config';
 import DeployConfig from './models/deploy-config';
 import TaskBase from './tasks/task-base';
 import { config as awsConfig, Credentials } from 'aws-sdk';
@@ -11,10 +10,10 @@ import UnzipArchive from './tasks/unzip-archive';
 import ZipApplication from './tasks/zip-application';
 
 export default class Deploy {
-  constructor(_awsConfig:AWSConfig, public config:DeployConfig = new DeployConfig()) {
+  constructor(public config:DeployConfig = new DeployConfig()) {
     awsConfig.update({
-      credentials: new Credentials(_awsConfig.accessKeyId, _awsConfig.secretAccessKey),
-      region: _awsConfig.region
+      credentials: new Credentials(config.accessKeyId, config.secretAccessKey),
+      region: config.region
     });
   }
 

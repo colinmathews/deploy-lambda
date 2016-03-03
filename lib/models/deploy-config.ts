@@ -4,6 +4,8 @@ export default class DeployConfig {
   localPathBase: string;
   s3KeyBase: string;
   s3KeyForZip: string;
+  extraPathsToInclude: string[];
+  extraPathsToExclude: string[];
 
   constructor(props: any = {}) {
     Object.keys(props).forEach((key) => {

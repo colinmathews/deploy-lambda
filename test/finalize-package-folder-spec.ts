@@ -5,11 +5,11 @@ let path = require('path');
 let fs = require('fs');
 import { assert } from 'chai';
 import DeployConfig from '../lib/models/deploy-config';
-import CopyNodeModules from '../lib/tasks/copy-node-modules';
+import FinalizePackageFolder from '../lib/tasks/finalize-package-folder';
 import deleteFolder from '../lib/util/delete-folder';
 
-describe('Copy node modules folders', () => {
-  let subject: CopyNodeModules;
+describe('Finalize package folder', () => {
+  let subject: FinalizePackageFolder;
   let config: DeployConfig;
 
   beforeEach(function() {
@@ -23,7 +23,7 @@ describe('Copy node modules folders', () => {
     config.uniqueID = new Date().valueOf().toString();
     config.localPathBase = path.resolve(__dirname, '../../test-run-directory');
     fs.mkdirSync(config.localPathBase);
-    subject = new CopyNodeModules();
+    subject = new FinalizePackageFolder();
   });
 
   afterEach(function() {

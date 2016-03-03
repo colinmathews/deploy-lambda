@@ -20,7 +20,7 @@ export default class UnzipArchive extends TaskBase {
     });
   }
 
-  private unzip(config: DeployConfig): Promise<any> {
+  private unzip(config:DeployConfig): Promise<any> {
     return new Promise((ok, fail) => {
       let stream = <any>fs.createReadStream(`${config.localPathBase}.zip`)
       .on('error', (err) => {
@@ -44,7 +44,7 @@ export default class UnzipArchive extends TaskBase {
     });
   }
 
-  deleteUnzippedFolder(localPath: string): Promise<any> {
+  deleteUnzippedFolder(localPath:string): Promise<any> {
     console.log(`Deleting folder ${localPath}`)
     return deleteFolder(localPath);
   }

@@ -1,31 +1,25 @@
 require('source-map-support').install({
   handleUncaughtExceptions: false
 });
-let path = require('path');
-let fs = require('fs');
 import { assert } from 'chai';
 import DeployConfig from '../../lib/models/deploy-config';
 import Configure from '../../lib/tasks/code/configure';
+import prepare from '../prepare';
 
 describe('Create git archive', () => {
   let subject: Configure;
   let config: DeployConfig;
 
   beforeEach(function() {
-    let jsonPath = path.resolve(__dirname, '../../../aws-config.json');
-    if (!fs.existsSync(jsonPath)) {
-      throw new Error("Please create a 'aws-config.json' file in the root directory of this project to test with AWS resources")
-    }
-
-    let rawConfig = JSON.parse(fs.readFileSync(jsonPath));
-    config = new DeployConfig(rawConfig);
-    config.targetEnvironment = 'test';
-    config.s3KeyBase = 'test-s3-dir/'
     subject = new Configure();
   });
 
   it('should fill the config with values', function() {
     this.timeout(5000);
+    config = new DeployConfig();
+    config.targetEnvironment = 'test';
+    config.s3KeyBase = 'test-s3-dir/'
+
     return subject.run(config)
     .then(() => {
       assert.isNotNull(config.uniqueID);

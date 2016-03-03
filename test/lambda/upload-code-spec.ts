@@ -9,6 +9,7 @@ import Configure from '../../lib/tasks/code/configure';
 import CreateGitArchive from '../../lib/tasks/code/create-git-archive';
 import UploadCode from '../../lib/tasks/lambda/upload-code';
 import { S3, Credentials } from 'aws-sdk';
+import prepare from '../prepare';
 
 describe('Upload code', () => {
   let subject: UploadCode;
@@ -57,15 +58,7 @@ describe('Upload code', () => {
   }
 
   beforeEach(function() {
-    let jsonPath = path.resolve(__dirname, '../../../aws-config.json');
-    if (!fs.existsSync(jsonPath)) {
-      throw new Error("Please create a 'aws-config.json' file in the root directory of this project to test with AWS resources")
-    }
-
-    let rawConfig = JSON.parse(fs.readFileSync(jsonPath));
-    config = new DeployConfig(rawConfig);
-    config.uniqueID = new Date().valueOf().toString();
-    config.localPathBase = path.resolve(__dirname, '../../../test-run-directory');
+    config = prepare();
     subject = new UploadCode();
 
     createS3(config);

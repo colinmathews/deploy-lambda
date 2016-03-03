@@ -7,6 +7,7 @@ import { assert } from 'chai';
 import DeployConfig from '../../lib/models/deploy-config';
 import ZipApplication from '../../lib/tasks/code/zip-application';
 import deleteFolder from '../../lib/util/delete-folder';
+import prepare from '../prepare';
 
 describe('Zip application', () => {
   let subject: ZipApplication;
@@ -15,15 +16,7 @@ describe('Zip application', () => {
   let fileContents = 'hi';
 
   beforeEach(function() {
-    let jsonPath = path.resolve(__dirname, '../../../aws-config.json');
-    if (!fs.existsSync(jsonPath)) {
-      throw new Error("Please create a 'aws-config.json' file in the root directory of this project to test with AWS resources")
-    }
-
-    let rawConfig = JSON.parse(fs.readFileSync(jsonPath));
-    config = new DeployConfig(rawConfig);
-    config.uniqueID = new Date().valueOf().toString();
-    config.localPathBase = path.resolve(__dirname, '../../../test-run-directory');
+    config = prepare();
     subject = new ZipApplication();
 
     if (!fs.existsSync(config.localPathBase)) {

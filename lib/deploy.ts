@@ -8,6 +8,8 @@ import CreateGitArchive from './tasks/code/create-git-archive';
 import FinalizePackageFolder from './tasks/code/finalize-package-folder';
 import UnzipArchive from './tasks/code/unzip-archive';
 import ZipApplication from './tasks/code/zip-application';
+import UploadCode from './tasks/lambda/upload-code';
+import PublishFunctions from './tasks/lambda/publish-functions';
 
 export default class Deploy {
   constructor(public config:DeployConfig = new DeployConfig()) {
@@ -43,6 +45,9 @@ export default class Deploy {
   }
 
   uploadToLambdaTasks(): TaskBase[] {
-    return [];
+    return [
+      new UploadCode(),
+      new PublishFunctions()
+    ];
   }
 }

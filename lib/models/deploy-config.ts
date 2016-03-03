@@ -12,6 +12,9 @@ export default class DeployConfig {
   extraPathsToInclude: string[];
   extraPathsToExclude: string[];
 
+  lambdaFunctionNames: string[];
+  lambdaAlias: string;
+
   constructor(props: any = {}) {
     Object.keys(props).forEach((key) => {
       this[key] = props[key];

@@ -19,7 +19,7 @@ export {
 // TODO: remove this test code
 let fs = require('fs')
 let path = require('path')
-let jsonPath = path.resolve(__dirname, '../aws-config.json');
+let jsonPath = path.resolve(__dirname, '../deploy-config.json');
 let rawConfig = JSON.parse(fs.readFileSync(jsonPath));
 let config = new DeployConfig(rawConfig);
 let deploy = new Deploy(config);

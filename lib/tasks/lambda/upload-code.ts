@@ -17,6 +17,7 @@ export default class UploadCode extends TaskBase {
     });
 
     console.log(`Uploading lambda code on ${config.bucket} to ${config.s3KeyForZip}...`);
+    let lastPercent;
     return new Promise((ok, fail) => {
       let req = client.putFile(`${config.localPathBase}.zip`, config.s3KeyForZip, function(err, res) {
         if (err) {
@@ -28,7 +29,10 @@ export default class UploadCode extends TaskBase {
         ok();
       });
       req.on('progress', (data) => {
-        console.log(`Upload progress ${data.percent}%...`);
+        if (data.percent !== lastPercent) {
+          console.log(`Upload progress ${data.percent}%...`); 
+          lastPercent = data.percent;
+        }
       });
     });
   }

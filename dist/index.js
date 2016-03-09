@@ -27,13 +27,4 @@ var deploy_1 = require('./lib/deploy');
 exports.Deploy = deploy_1.default;
 var permissions_1 = require('./lib/permissions');
 exports.Permissions = permissions_1.default;
-// TODO: Figure out why if we don't 
-// export a class with access to the import statements,
-// the .d.ts file will not bring over the import statements.
-var shim = (function () {
-    function shim() {
-    }
-    return shim;
-}());
-exports.shim = shim;
 //# sourceMappingURL=index.js.map

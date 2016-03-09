@@ -24,7 +24,7 @@
     "source-map-support": "^0.4.0"
   },
   "scripts": {
-    "prepublish": "npm run clean && npm run typings install && npm run tsc",
+    "prepublish": "npm run clean && npm run typings install && npm run tsc && node prepublish.js",
     "tsc": "tsc",
     "clean": "rm -rf dist",
     "clean-tests": "rm -rf dist/test",

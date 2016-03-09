@@ -35,6 +35,5 @@ node_modules
 # We have sensitive keys here
 deploy-config.json
 
-# We use Typescript, not JS
-dist
+# Ignore typings
 typings

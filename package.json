@@ -10,10 +10,6 @@
     "es6-promise": "^3.1.2",
     "knox": "^0.9.2",
     "node-uuid": "^1.4.7",
-    "source-map-support": "^0.4.0",
-    "tsc": "^1.20150623.0",
-    "typescript": "^1.7.5",
-    "typings": "^0.6.8",
     "unzip": "^0.1.11"
   },
   "main": "dist/index.js",
@@ -21,16 +17,19 @@
   "bin": "command-line.js",
   "devDependencies": {
     "chai": "^3.5.0",
-    "mocha": "^2.4.5"
+    "mocha": "^2.4.5",
+    "tsc": "^1.20150623.0",
+    "typescript": "^1.7.5",
+    "typings": "^0.6.8",
+    "source-map-support": "^0.4.0"
   },
   "scripts": {
-    "preinstall": "npm install tsc",
-    "postinstall": "npm run clean && npm run typings install && npm run tsc",
+    "prepublish": "npm run clean && npm run typings install && npm run tsc",
     "tsc": "tsc",
     "clean": "rm -rf dist",
     "clean-tests": "rm -rf dist/test",
     "tsc:w": "tsc -w",
-    "pretest": "npm run clean && npm run tsc",
+    "pretest": "npm run clean && npm run typings install && npm run tsc",
     "test": "mocha",
     "typings": "typings"
   },

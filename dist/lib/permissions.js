@@ -12,7 +12,7 @@ var Permissions = (function () {
         });
     }
     Permissions.prototype.listDeployPermissions = function () {
-        return ['lambda:ListAliases', 'lambda:ListVersionsByFunction', 'lambda:UpdateAlias', 'lambda:DeleteFunction'];
+        return ['lambda:ListAliases', 'lambda:ListVersionsByFunction', 'lambda:UpdateAlias', 'lambda:DeleteFunction', 'lambda:InvokeFunction'];
     };
     Permissions.prototype.grant = function () {
         var _this = this;

@@ -12,7 +12,7 @@ class TaskBase {
   }
 
   protected rootPath(): string {
-    let root = path.resolve(__dirname, '../../../');
+    let root = path.resolve();
     return root.replace(/\/?$/gi, '');
   }
 

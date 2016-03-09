@@ -24,7 +24,7 @@ var result = program
   .option('-r, --region <text>', 'aws region')
   .option('-b, --bucket <text>', 'aws s3 bucket')
   .option('-f, --functions <comma list>', 'function names to deploy', list)
-  .option('-a, --alias <text>', 'alias to point to deployed versions')
+  .option('-a, --lambda-alias <text>', 'alias to point to deployed versions')
   .option('-m, --max-versions <number>', 'delete all but N unbound versions', parseInt)
   .option('-i, --includePaths <comma list>', "local paths to include that aren't part of the repo", list)
   .option('-x, --excludePaths <comma list>', "local paths to exclude that are part of the repo", list)
@@ -58,7 +58,7 @@ raw.s3KeyBase = program.s3KeyBase || raw.s3KeyBase;
 raw.extraPathsToInclude = program.includePaths || raw.extraPathsToInclude;
 raw.extraPathsToExclude = program.excludePaths || raw.extraPathsToExclude;
 raw.lambdaFunctionNames = program.functions || raw.lambdaFunctionNames;
-raw.lambdaAlias = program.alias || raw.lambdaAlias;
+raw.lambdaAlias = program.lambdaAlias || raw.lambdaAlias;
 raw.awsPrincipal = program.awsPrincipal || raw.awsPrincipal;
 raw.maxUnboundVersionsToKeep = program.maxVersions || raw.maxUnboundVersionsToKeep;
 

@@ -7,7 +7,10 @@ let AWS = require('aws-sdk');
 
 export default class UploadCode extends TaskBase {
   run(config:DeployConfig): Promise<any> {
-    return this.upload(config);
+    return this.upload(config)
+    .then(() => {
+      return this.deleteZipFile(config);
+    });
   }
 
   private upload(config: DeployConfig): Promise<any> {
@@ -36,6 +39,24 @@ export default class UploadCode extends TaskBase {
           console.log(`Upload progress ${data.percent}%...`); 
           lastPercent = data.percent;
         }
+      });
+    });
+  }
+
+  private deleteZipFile(config:DeployConfig): Promise<any> {
+    let zipPath = `${config.localPathBase}.zip`;
+    return new Promise((ok, fail) => {
+      fs.exists(zipPath, (exists) => {
+        if (!exists) {
+          return ok();
+        }
+        console.log(`Deleting zip file ${zipPath}...`);
+        fs.unlink(zipPath, (err) => {
+          if (err) {
+            return fail(err);
+          }
+          ok();
+        });
       });
     });
   }

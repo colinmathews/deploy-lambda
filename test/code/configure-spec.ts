@@ -17,7 +17,6 @@ describe('Create git archive', () => {
   it('should fill the config with values', function() {
     this.timeout(5000);
     config = new DeployConfig();
-    config.targetEnvironment = 'test';
     config.s3KeyBase = 'test-s3-dir/'
 
     return subject.run(config)

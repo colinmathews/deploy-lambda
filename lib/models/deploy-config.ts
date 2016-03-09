@@ -5,7 +5,6 @@ export default class DeployConfig {
   bucket: string;
 
   uniqueID: string;
-  targetEnvironment: string;
   localPathBase: string;
   s3KeyBase: string;
   s3KeyForZip: string;

@@ -18,7 +18,11 @@ export default class Configure extends TaskBase {
     .then((result) => {
       if (!config.uniqueID) {
         let commit = parseCommitFromGitLog(result);
-        config.uniqueID = `deploy-${config.targetEnvironment}-${commit}`; 
+        let alias = '';
+        if (config.lambdaAlias) {
+          alias = `-${config.lambdaAlias}`; 
+        }
+        config.uniqueID = `deploy${alias}-${commit}`; 
       }
       config.localPathBase = config.localPathBase || `${this.rootPath()}/${config.uniqueID }`;
 

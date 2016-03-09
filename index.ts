@@ -1,5 +1,6 @@
 import DeployConfig from './lib/models/deploy-config';
 import Configure from './lib/tasks/code/configure';
+import TaskBase from './lib/tasks/task-base';
 import CreateGitArchive from './lib/tasks/code/create-git-archive';
 import FinalizePackageFolder from './lib/tasks/code/finalize-package-folder';
 import UnzipArchive from './lib/tasks/code/unzip-archive';
@@ -27,6 +28,7 @@ export class shim {
   i: PublishFunctions;
   j: UploadCode;
   k: DeleteOldVersions;
+  l: TaskBase;
 }
 
 export {
@@ -42,5 +44,6 @@ export {
   deleteFolder,
   execute,
   Deploy,
-  Permissions
+  Permissions,
+  TaskBase
 }

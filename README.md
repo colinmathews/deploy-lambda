@@ -7,13 +7,13 @@ npm install deploy-lambda --save-dev
 ```
 
 ## Preparing AWS
-At the time of this writing, Lambda requires that functions are created through the AWS console. After doing so you'll need to grant permissions to invoke and deploy your functions. See the note at the bottom of this readme for how to do this.
+At the time of this writing, Lambda requires that functions are created through the AWS console. After doing so you'll need to grant permissions to invoke and deploy your functions. See [this section](#lambda-permissions) for how to do this.
 
 ## Before you deploy
 This module deploys your last commit for the branch you're currently on. It's important that you've run `npm install` before deploying as those modules will be bundled with your code.
 
 ## Deploying your repo with npm
-The simplest way to use this module is to create an npm script to deploy your repo to lambda. Use a package.json like below. This example uses a `deploy-config.json` like below for simplicity. For advanced command line usage, see the note at the bottom of this readme.
+The simplest way to use this module is to create an npm script to deploy your repo to lambda. Use a package.json like below. This example uses a `deploy-config.json` like below for simplicity. See [this section](#advanced-npm-script-usage) for advanced command line usage.
 ```javascript
 {
   "name": "deploy-lambda-example",
@@ -22,7 +22,7 @@ The simplest way to use this module is to create an npm script to deploy your re
     "deploy": "deploy-lambda deploy -c deploy-config.json"
   },
   "devDependencies": {
-    "deploy-lambda": "1.0.3"
+    "deploy-lambda": "1.0.4"
   }
 }
 ```

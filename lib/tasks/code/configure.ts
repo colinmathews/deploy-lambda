@@ -27,8 +27,10 @@ export default class Configure extends TaskBase {
       config.localPathBase = config.localPathBase || `${this.rootPath()}/${config.uniqueID }`;
 
       // Remove last slash so this is normalized
-      config.s3KeyBase = config.s3KeyBase.replace(/\/?$/gi, '');
-      config.s3KeyForZip = config.s3KeyForZip || `${config.s3KeyBase}/${config.uniqueID}.zip`;
+      if (config.s3KeyBase) {
+        config.s3KeyBase = config.s3KeyBase.replace(/\/?$/gi, '');
+        config.s3KeyForZip = config.s3KeyForZip || `${config.s3KeyBase}/${config.uniqueID}.zip`;
+      }
     });
   }
 }

@@ -16,20 +16,20 @@ export default class Permissions {
     return ['lambda:ListAliases', 'lambda:ListVersionsByFunction', 'lambda:UpdateAlias', 'lambda:DeleteFunction'];
   }
 
-  grant(principal: string, functionNames: string[], ...permissions: string[]): Promise<any> {
+  grant(...permissions: string[]): Promise<any> {
     if (permissions.length === 0) {
       permissions = this.listDeployPermissions();
     }
-    let promises = functionNames.reduce((result, functionName) => {
+    let promises = this.config.lambdaFunctionNames.reduce((result, functionName) => {
       let add = permissions.map((permission) => {
-        return this.grantPermission(principal, functionName, permission);
+        return this.grantPermission(this.config.awsPrincipal, functionName, permission);
       });
       return result.concat(add);
     }, []);
     return Promise.all(promises);
   }
 
-  private grantPermission(principal: string, functionName: string, permission: string): Promise<any> {
+  grantPermission(principal: string, functionName: string, permission: string): Promise<any> {
     let lambda = new AWS.Lambda();
     return new Promise((ok, fail) => {
       console.log(`Granting ${permission} to ${principal} on ${functionName}...`);

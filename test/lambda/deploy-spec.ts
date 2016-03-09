@@ -33,7 +33,7 @@ describe('Run a real lambda deploy: ', () => {
         return this.skip();
       }
       this.timeout(8000);
-      return subject.grant(testConfig.permissions.principal, testConfig.permissions.functions)
+      return subject.grant()
       .then((result) => {
         // Nothing easy to test here
         console.log(JSON.stringify(result, null, 2));
@@ -62,7 +62,9 @@ describe('Run a real lambda deploy: ', () => {
 
     beforeEach(function() {
       let copyConfig = new DeployConfig(config);
-      copyConfig.s3KeyForZip = testConfig.publishThisRepo.existingS3KeyForZip;
+      if (testConfig.publishThisRepo && testConfig.publishThisRepo.existingS3KeyForZip) {
+        copyConfig.s3KeyForZip = testConfig.publishThisRepo.existingS3KeyForZip; 
+      }
       subject = new Deploy(copyConfig);
     });
 

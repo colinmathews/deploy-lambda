@@ -13,6 +13,7 @@ export default class DeployConfig {
 
   lambdaFunctionNames: string[];
   lambdaAlias: string;
+  awsPrincipal: string;
   maxUnboundVersionsToKeep: number;
 
   constructor(props: any = {}) {

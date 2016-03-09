@@ -9,7 +9,7 @@ npm install deploy-lambda --save
 ## Testing
 TODO:
 
-## Manual work
+## Lambda Permissions
 At the time of this writing, Lambda requires that functions are created through the AWS console. This package includes a class `Permissions` that can add the necessary permissions to deploy functions, however, there is an open issue that seems this doesn't always take hold.
 
 This is the policy that can be created in IAM. In testing, it seems like this policy had to be applied directly to a user. Permission errors were encountered if the policy was applied to one of the groups the user belonged to.

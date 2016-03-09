@@ -12,20 +12,4 @@ import deleteFolder from './lib/util/delete-folder';
 import execute from './lib/util/execute';
 import Deploy from './lib/deploy';
 import Permissions from './lib/permissions';
-
-export {
-  DeployConfig,
-  Configure,
-  CreateGitArchive,
-  FinalizePackageFolder,
-  UnzipArchive,
-  ZipApplication,
-  PublishFunctions,
-  UploadCode,
-  DeleteOldVersions,
-  deleteFolder,
-  execute,
-  Deploy,
-  Permissions,
-  TaskBase
-}
+export { DeployConfig, Configure, CreateGitArchive, FinalizePackageFolder, UnzipArchive, ZipApplication, PublishFunctions, UploadCode, DeleteOldVersions, deleteFolder, execute, Deploy, Permissions, TaskBase };

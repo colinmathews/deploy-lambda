@@ -14,7 +14,7 @@ describe('Unzip git archive', () => {
   let config: DeployConfig;
 
   beforeEach(function() {
-    config = prepare();
+    config = prepare().config;
     subject = new UnzipArchive();
 
     return new CreateGitArchive().run(config);

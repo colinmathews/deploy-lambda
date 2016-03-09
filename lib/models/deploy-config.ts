@@ -14,6 +14,7 @@ export default class DeployConfig {
 
   lambdaFunctionNames: string[];
   lambdaAlias: string;
+  maxUnboundVersionsToKeep: number;
 
   constructor(props: any = {}) {
     Object.keys(props).forEach((key) => {

@@ -10,6 +10,7 @@ import UnzipArchive from './tasks/code/unzip-archive';
 import ZipApplication from './tasks/code/zip-application';
 import UploadCode from './tasks/lambda/upload-code';
 import PublishFunctions from './tasks/lambda/publish-functions';
+import DeleteOldVersions from './tasks/lambda/delete-old-versions';
 
 export default class Deploy {
   constructor(public config:DeployConfig = new DeployConfig()) {
@@ -47,7 +48,8 @@ export default class Deploy {
   uploadToLambdaTasks(): TaskBase[] {
     return [
       new UploadCode(),
-      new PublishFunctions()
+      new PublishFunctions(),
+      new DeleteOldVersions()
     ];
   }
 }

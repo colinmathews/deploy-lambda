@@ -1,6 +1,7 @@
 import { Promise } from 'es6-promise';
 import DeployConfig from '../../models/deploy-config';
 import TaskBase from '../task-base';
+import fs = require('fs');
 let knox = require('knox');
 let AWS = require('aws-sdk');
 
@@ -9,14 +10,16 @@ export default class UploadCode extends TaskBase {
     return this.upload(config);
   }
 
-  private upload(config:DeployConfig): Promise<any> {
+  private upload(config: DeployConfig): Promise<any> {
     let client = knox.createClient({
       key: config.accessKeyId,
       secret: config.secretAccessKey,
       bucket: config.bucket
     });
 
-    console.log(`Uploading lambda code on ${config.bucket} to ${config.s3KeyForZip}...`);
+    let stats = fs.statSync(`${config.localPathBase}.zip`);
+    let megaBytes = Math.round(stats.size / (1024 * 1024));
+    console.log(`Uploading lambda code on ${config.bucket} to ${config.s3KeyForZip} (${megaBytes}MB)...`);
     let lastPercent;
     return new Promise((ok, fail) => {
       let req = client.putFile(`${config.localPathBase}.zip`, config.s3KeyForZip, function(err, res) {

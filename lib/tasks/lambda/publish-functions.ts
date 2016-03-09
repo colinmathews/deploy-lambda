@@ -2,9 +2,15 @@ import { Promise } from 'es6-promise';
 import DeployConfig from '../../models/deploy-config';
 import TaskBase from '../task-base';
 let AWS = require('aws-sdk');
+import { config as awsConfig, Credentials } from 'aws-sdk';
 
 export default class PublishFunctions extends TaskBase {
   run(config:DeployConfig): Promise<any> {
+    awsConfig.update({
+      credentials: new Credentials(config.accessKeyId, config.secretAccessKey),
+      region: config.region
+    });
+
     return this.publish(config)
     .then((result:any[]) => {
       if (config.lambdaAlias) {

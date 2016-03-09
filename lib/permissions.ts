@@ -1,7 +1,8 @@
 import { Promise } from 'es6-promise';
 import DeployConfig from './models/deploy-config';
 import { config as awsConfig, Credentials } from 'aws-sdk';
-import AWS = require('aws-sdk');
+let AWS = require('aws-sdk');
+let uuid = require('node-uuid');
 
 export default class Permissions {
   constructor(public config:DeployConfig) {
@@ -11,5 +12,38 @@ export default class Permissions {
     });
   }
 
-  // TODO:
+  listDeployPermissions():string[] {
+    return ['lambda:ListAliases', 'lambda:ListVersionsByFunction', 'lambda:UpdateAlias', 'lambda:DeleteFunction'];
+  }
+
+  grant(principal: string, functionNames: string[], ...permissions: string[]): Promise<any> {
+    if (permissions.length === 0) {
+      permissions = this.listDeployPermissions();
+    }
+    let promises = functionNames.reduce((result, functionName) => {
+      let add = permissions.map((permission) => {
+        return this.grantPermission(principal, functionName, permission);
+      });
+      return result.concat(add);
+    }, []);
+    return Promise.all(promises);
+  }
+
+  private grantPermission(principal: string, functionName: string, permission: string): Promise<any> {
+    let lambda = new AWS.Lambda();
+    return new Promise((ok, fail) => {
+      console.log(`Granting ${permission} to ${principal} on ${functionName}...`);
+      lambda.addPermission({
+        FunctionName: functionName,
+        Action: permission,
+        Principal: principal,
+        StatementId: uuid.v4().replace(/-/g, '')
+      }, (err, result) => {
+        if (err) {
+          return fail(err);
+        }
+        ok(result);
+      });
+    });
+  }
 }

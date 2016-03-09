@@ -16,7 +16,7 @@ describe('Zip application', () => {
   let fileContents = 'hi';
 
   beforeEach(function() {
-    config = prepare();
+    config = prepare().config;
     subject = new ZipApplication();
 
     if (!fs.existsSync(config.localPathBase)) {

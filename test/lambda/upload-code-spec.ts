@@ -58,7 +58,7 @@ describe('Upload code', () => {
   }
 
   beforeEach(function() {
-    config = prepare();
+    config = prepare().config;
     subject = new UploadCode();
 
     createS3(config);

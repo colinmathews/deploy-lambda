@@ -12,7 +12,7 @@ describe('Create git archive', () => {
   let config: DeployConfig;
 
   beforeEach(function() {
-    config = prepare();
+    config = prepare().config;
     subject = new CreateGitArchive();
   });
 

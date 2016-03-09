@@ -14,7 +14,7 @@ describe('Finalize package folder', () => {
   let config: DeployConfig;
 
   beforeEach(function() {
-    config = prepare();
+    config = prepare().config;
     fs.mkdirSync(config.localPathBase);
     subject = new FinalizePackageFolder();
   });

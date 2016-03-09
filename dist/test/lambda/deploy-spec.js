@@ -12,11 +12,11 @@ var deploy_1 = require('../../lib/deploy');
 var prepare_1 = require('../prepare');
 describe('Run a real lambda deploy: ', function () {
     var config;
-    var testConfig;
+    var rawConfig;
     beforeEach(function () {
         var preparation = prepare_1.default();
         config = preparation.config;
-        testConfig = preparation.rawConfig.configForRunningTests;
+        rawConfig = preparation.rawConfig;
     });
     describe('Permissions', function () {
         var subject;
@@ -24,7 +24,7 @@ describe('Run a real lambda deploy: ', function () {
             subject = new permissions_1.default(config);
         });
         it('should grant necessary permissions', function () {
-            if (!testConfig.permissions) {
+            if (!rawConfig.testPermissions) {
                 return this.skip();
             }
             this.timeout(8000);
@@ -41,7 +41,7 @@ describe('Run a real lambda deploy: ', function () {
             subject = new deploy_1.default(config);
         });
         it('should deploy the last commit as a new version of function', function () {
-            if (!testConfig.publishThisRepo || testConfig.publishThisRepo.existingS3KeyForZip) {
+            if (!rawConfig.testPublishThisRepo || rawConfig.testPublishThisRepo.existingS3KeyForZip) {
                 return this.skip();
             }
             this.timeout(10 * 60 * 1000);
@@ -52,8 +52,8 @@ describe('Run a real lambda deploy: ', function () {
         var subject;
         beforeEach(function () {
             var copyConfig = new deploy_config_1.default(config);
-            if (testConfig.publishThisRepo && testConfig.publishThisRepo.existingS3KeyForZip) {
-                copyConfig.s3KeyForZip = testConfig.publishThisRepo.existingS3KeyForZip;
+            if (rawConfig.testPublishThisRepo && rawConfig.testPublishThisRepo.existingS3KeyForZip) {
+                copyConfig.s3KeyForZip = rawConfig.testPublishThisRepo.existingS3KeyForZip;
             }
             subject = new deploy_1.default(copyConfig);
         });
@@ -61,7 +61,7 @@ describe('Run a real lambda deploy: ', function () {
             var tasks = [
                 new configure_1.default(),
                 new publish_functions_1.default()];
-            if (!testConfig.publishThisRepo || !testConfig.publishThisRepo.existingS3KeyForZip) {
+            if (!rawConfig.testPublishThisRepo || !rawConfig.testPublishThisRepo.existingS3KeyForZip) {
                 return this.skip();
             }
             this.timeout(1 * 60 * 1000);

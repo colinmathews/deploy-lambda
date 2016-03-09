@@ -13,7 +13,7 @@ export default class Permissions {
   }
 
   listDeployPermissions():string[] {
-    return ['lambda:ListAliases', 'lambda:ListVersionsByFunction', 'lambda:UpdateAlias', 'lambda:DeleteFunction'];
+    return ['lambda:ListAliases', 'lambda:ListVersionsByFunction', 'lambda:UpdateAlias', 'lambda:DeleteFunction', 'lambda:InvokeFunction'];
   }
 
   grant(...permissions: string[]): Promise<any> {

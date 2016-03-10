@@ -18,13 +18,14 @@
   "devDependencies": {
     "chai": "^3.5.0",
     "mocha": "^2.4.5",
+    "source-map-support": "^0.4.0",
     "tsc": "^1.20150623.0",
     "typescript": "^1.7.5",
     "typings": "^0.6.8",
-    "source-map-support": "^0.4.0"
+    "uncommitted": "^1.0.0"
   },
   "scripts": {
-    "prepublish": "npm run clean && npm run typings install && npm run tsc && node prepublish.js",
+    "prepublish": "npm run clean && npm run typings install && npm run tsc && uncommitted",
     "tsc": "tsc",
     "clean": "rm -rf dist",
     "clean-tests": "rm -rf dist/test",

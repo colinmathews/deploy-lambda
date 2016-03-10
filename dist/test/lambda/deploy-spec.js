@@ -16,7 +16,7 @@ describe('Run a real lambda deploy: ', function () {
     beforeEach(function () {
         var preparation = prepare_1.default();
         config = preparation.config;
-        testConfig = preparation.rawConfig.configForRunningTests;
+        testConfig = preparation.rawConfig;
     });
     describe('Permissions', function () {
         var subject;

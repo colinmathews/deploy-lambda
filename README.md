@@ -22,7 +22,7 @@ The simplest way to use this module is to create an npm script to deploy your re
     "deploy": "deploy-lambda deploy -c deploy-config.json"
   },
   "devDependencies": {
-    "deploy-lambda": "1.1.0"
+    "deploy-lambda": "1.2.0"
   }
 }
 ```

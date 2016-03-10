@@ -25,7 +25,8 @@
     "uncommitted": "^1.0.0"
   },
   "scripts": {
-    "prepublish": "npm run clean && npm run typings install && npm run tsc && uncommitted",
+    "predopublish": "npm run clean && npm run typings install && npm run tsc && uncommitted",
+    "dopublish": "npm publish",
     "tsc": "tsc",
     "clean": "rm -rf dist",
     "clean-tests": "rm -rf dist/test",

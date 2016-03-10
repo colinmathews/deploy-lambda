@@ -1,6 +1,6 @@
 {
   "name": "deploy-lambda",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Packages a repo and deploys to AWS Lambda.",
   "dependencies": {
     "aws-sdk": "^2.2.36",

@@ -27,6 +27,24 @@ The simplest way to use this module is to create an npm script to deploy your re
 }
 ```
 
+### Where `deploy-config.json` looks like:
+```javascript
+{
+  accessKeyId: "<YOUR INFO>",
+  secretAccessKey: "<YOUR INFO>",
+  region: "us-east-1",
+  bucket: "<YOUR INFO>",
+  s3KeyBase: "<YOUR INFO>",
+  lambdaFunctionNames: ["<YOUR INFO>"],
+  lambdaAlias: "<YOUR INFO>"
+}
+```
+
+### Then deploy from the command-line:
+```
+npm run deploy
+```
+
 ## API
 You can customize and extend your use of `deploy-lambda` in your application in lots of ways. The configuration options are explained here:
 

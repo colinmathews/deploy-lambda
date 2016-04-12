@@ -1,1 +1,1 @@
-export default function deleteFolder(localPath: any): Promise<any>;
+export default function deleteFolder(localPath: string): Promise<any>;

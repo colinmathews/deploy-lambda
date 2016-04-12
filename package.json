@@ -20,12 +20,13 @@
     "mocha": "^2.4.5",
     "source-map-support": "^0.4.0",
     "tsc": "^1.20150623.0",
+    "tslint": "^3.7.3",
     "typescript": "^1.7.5",
     "typings": "^0.6.8",
     "uncommitted": "^1.0.0"
   },
   "scripts": {
-    "predopublish": "npm run clean && npm run typings install && npm run tsc && uncommitted",
+    "predopublish": "npm run clean && npm run typings install && npm run tsc && npm run lint && uncommitted",
     "dopublish": "npm publish",
     "tsc": "tsc",
     "clean": "rm -rf dist",
@@ -33,7 +34,9 @@
     "tsc:w": "tsc -w",
     "pretest": "npm run clean && npm run typings install && npm run tsc",
     "test": "mocha",
-    "typings": "typings"
+    "typings": "typings",
+    "lint": "tslint lib/**/*.ts test/**.*.ts index.ts",
+    "lint:q": "tslint --force lib/**/*.ts test/**.*.ts index.ts"
   },
   "repository": {
     "type": "git",

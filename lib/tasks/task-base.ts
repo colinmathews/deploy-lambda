@@ -16,7 +16,7 @@ class TaskBase {
     return root.replace(/\/?$/gi, '');
   }
 
-  protected execute(command:string): Promise<any> {
+  protected execute(command: string): Promise<any> {
     console.log(`Executing ${command}`);
     return execute(command);
   }

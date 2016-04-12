@@ -1,6 +1,7 @@
 "use strict";
 var child_process = require('child_process');
 function execute(command) {
+    'use strict';
     var exec = child_process.exec;
     return new Promise(function (ok, fail) {
         exec(command, function (err, result) {
